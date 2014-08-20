@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+import com.github.xsavikx.android.screencast.client.handler.ClientHandler;
+
 public class Main {
 	public static void main(String[] args) {
 		System.out.println("[agent] Starting ...");
@@ -30,31 +32,36 @@ public class Main {
 
 	public void execute() throws IOException {
 		System.out.println("[agent] Main.execute()");
-		ServerSocket ss = new ServerSocket(port);
-		System.out.println("[agent] ServerSocket created on port=" + port);
-		while (true) {
-			final Socket s = ss.accept();
-			if (s == null || ss.isClosed())
-				break;
-			System.out.println("[agent] New client ! ");
-			Thread t = new Thread("Client Handler") {
-				@Override
-				public void run() {
-					try {
-						new ClientHandler(s);
-					} catch (Exception ex) {
-						ex.printStackTrace();
+		ServerSocket ss = null;
+		try {
+			ss = new ServerSocket(port);
+			System.out.println("[agent] ServerSocket created on port=" + port);
+			while (true) {
+				final Socket s = ss.accept();
+				if (s == null || ss.isClosed())
+					break;
+				System.out.println("[agent] New client ! ");
+				Thread t = new Thread("Client Handler") {
+					@Override
+					public void run() {
+						new ClientHandler(s).start();
+						try {
+							s.close();
+						} catch (IOException ex) {
+						}
 					}
-					try {
-						s.close();
-					} catch (Exception ex) {
-						// ignor�
-					}
-				}
-			};
-			t.start();
-		}
-		ss.close();
-	}
+				};
+				t.start();
+			}
+		} catch (IOException exception) {
+		} finally {
+			if (ss != null) {
+				try {
+					ss.close();
+				} catch (IOException ignored) {
 
+				}
+			}
+		}
+	}
 }
