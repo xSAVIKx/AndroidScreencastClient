@@ -9,10 +9,8 @@ import com.github.xsavikx.android.screencast.client.handler.ClientHandler;
 public class Main {
 	public static void main(String[] args) {
 		System.out.println("[agent] Starting ...");
-
 		try {
 			if (args.length == 0) {
-
 				throw new RuntimeException("Need >= 1 param");
 			}
 			int port = Integer.parseInt(args[0]);

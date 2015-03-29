@@ -6,7 +6,7 @@ rm classes.dex
 echo "Building using ANT"
 ant clean dist
 echo "dexing classes"
-/opt/android-sdk/build-tools/20/dx --dex --output=classes.dex dist/MyInjectEventApp.jar
+dx --dex --output=classes.dex dist/MyInjectEventApp.jar
 echo "adding classes.dex and .classpath to MyInjectEventApp"
 aapt add dist/MyInjectEventApp.jar classes.dex
 aapt add dist/MyInjectEventApp.jar .classpath

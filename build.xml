@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <project default="dist" name="Create Jar for Project" basedir=".">
-	<!--this file was created by Eclipse Runnable JAR Export Wizard-->
-	<!--ANT 1.7 is required                                        -->
+	<!--this file was created by Eclipse Runnable JAR Export Wizard -->
+	<!--ANT 1.7 is required -->
 	<property name="src" location="src" />
 	<property name="build" location="build" />
 	<property name="dist" location="dist" />
@@ -14,14 +14,16 @@
 	</target>
 
 	<target name="compile" depends="init" description="compile the source">
-		<javac srcdir="${src}" destdir="${build}" classpath="${classpath}" debug="on" />
+		<javac srcdir="${src}" destdir="${build}" classpath="${classpath}"
+			debug="on" />
 	</target>
 
 	<target name="dist" depends="compile">
 		<mkdir dir="${dist}" />
 		<jar destfile="${dist}/MyInjectEventApp.jar">
 			<manifest>
-				<attribute name="Main-Class" value="com.github.xsavikx.android.screencast.client.Main" />
+				<attribute name="Main-Class"
+					value="com.github.xsavikx.android.screencast.client.Main" />
 				<attribute name="Built-By" value="${user.name}" />
 			</manifest>
 
