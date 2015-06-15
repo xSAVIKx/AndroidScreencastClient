@@ -4,4 +4,4 @@ AndroidScreencastClient
 
 This project is client for AndroidScreencast project (https://github.com/xSAVIKx/AndroidScreencast)
 
-Be aware thank you should build client using JDK 1.6, cause DX tool work with bytecode of 1.6 java version.
+Be aware that you should build client using JDK 1.6, cause DX tool work with bytecode of 1.6 java version.
